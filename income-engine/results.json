@@ -1,13 +1,9 @@
 {
-  "schema_version": "1.0",
-  "updated_at": "2026-08-28T09:27:00+05:30",
+  "schema_version": "1.1",
+  "updated_at": "2026-08-28T10:15:00+05:30",
   "objective": "Convert existing market demand into legitimate revenue as directly as possible, prioritizing end-to-end autonomous execution and reusable one-time setup rails.",
   "execution_policy": {
-    "priority": [
-      "Fully executable now with existing tools",
-      "One-time setup unlocks reusable high-value rail",
-      "Reject when recurring unsupported manual work remains"
-    ],
+    "priority": ["Fully executable now with existing tools", "One-time setup unlocks reusable high-value rail", "Reject when recurring unsupported manual work remains"],
     "target_payment_window": "same-day preferred; otherwise credible first payment within 7 days"
   },
   "candidates": [
@@ -19,13 +15,8 @@
       "one_time_setup": "Connect the Frantic MCP endpoint to an environment ChatGPT can operate and complete reusable identity/payout onboarding.",
       "post_setup_autonomy": "high",
       "reusability": "high",
-      "observed_opportunities": [
-        {"bounty_id": 113, "observed_reward_usd": 18, "observed_slots": 1},
-        {"bounty_id": 97, "observed_reward_usd": 10, "observed_slots": 5},
-        {"bounty_id": 120, "observed_reward_usd": 1, "observed_slots_remaining": 101}
-      ],
       "payout_path": "x402 payout identity",
-      "notes": "Designed around programmatic claim, delivery, review/revision and payout-status operations. Opportunity availability and amounts should be re-verified before execution."
+      "notes": "Re-verify current bounty inventory before setup."
     },
     {
       "name": "Agrenting autonomous-agent marketplace",
@@ -35,34 +26,55 @@
       "one_time_setup": "Connect provider/MCP rail and configure reusable payout wallet/identity.",
       "post_setup_autonomy": "very high",
       "reusability": "very high",
-      "observed_provider_economics": {
-        "provider_share_percent": 95,
-        "monthly_fee_usd": 0,
-        "payout_assets_observed": ["USDT", "USDC", "DAI"]
-      },
-      "observed_task_price_range_usd": [3, 60],
-      "notes": "Infrastructure fit is strong, but public buyer-task volume was not yet sufficiently verified. Re-verify live funded demand before setup."
+      "observed_provider_economics": {"provider_share_percent": 95, "monthly_fee_usd": 0, "payout_assets_observed": ["USDT", "USDC", "DAI"]},
+      "notes": "Infrastructure fit strong; buyer demand density still needs proof."
+    },
+    {
+      "name": "Fluxer Polls bounty #2",
+      "classification": "REJECTED_CURRENTLY",
+      "status": "funded_but_competed_and_large_scope",
+      "reward_usd": 500,
+      "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/2",
+      "verified": {"state": "open", "bounty_platform": "BountyHub", "comments": 17, "active_worker_confirmed_by_maintainer": true},
+      "reason": "Maintainer explicitly states another person is already working on it; full scope spans server, desktop and mobile plus ranked-choice, images, permissions and moderation. Expected value is inferior to an uncontested fixed-scope bounty.",
+      "learned_rule": "Do not equate open+funded with winnable. Read canonical issue comments for maintainer-confirmed active workers before spending build time."
+    },
+    {
+      "name": "Fluxer Events/Calendar bounty #3",
+      "classification": "WATCH_NOT_BUILD",
+      "reward_usd": 500,
+      "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/3",
+      "reason": "Full-stack backend+desktop+mobile single-PR acceptance requirement makes execution large relative to reward; project also warns against low-quality GenAI output.",
+      "learned_rule": "Penalize bounties requiring multi-client full-stack implementation in one PR even when nominal competition is low."
+    },
+    {
+      "name": "BountyScout / bounty-plaza mirrors",
+      "classification": "DISCOVERY_ONLY",
+      "status": "never_treat_mirror_as_payment_proof",
+      "reason": "Search results include mirrored or synthetic-looking bounty listings. Canonical source, actual funding/escrow and current state must be independently verified.",
+      "learned_rule": "Mirrors are leads only; canonical payer evidence is mandatory."
     },
     {
       "name": "The Colony",
       "classification": "DEPRIORITIZED",
-      "status": "structural_demand_and_state_quality_concerns",
-      "observed_metrics": {
-        "paid_task_listings": 50,
-        "accepted": 2,
-        "completed": 0
-      },
-      "notes": "Low demonstrated completion density and stale-task-state concern reduced expected value."
+      "status": "structural_demand_and_state_quality_concerns"
     },
     {
       "name": "AsyncAPI microgrant rail",
       "classification": "REJECTED_FOR_CURRENT_CYCLE",
-      "status": "worthwhile_issues_observed_as_assigned_or_completed",
-      "notes": "Do not spend build time unless newly open eligible paid issues appear."
+      "status": "worthwhile_issues_observed_as_assigned_or_completed"
     }
   ],
+  "search_filters_learned": [
+    "Canonical issue must be open.",
+    "Verify funding or payer evidence at canonical source, not a mirror.",
+    "Read issue comments before build; reject maintainer-confirmed competing worker unless economics justify race.",
+    "Reject already-rewarded issues even if GitHub state remains open.",
+    "Prefer narrow acceptance criteria over full-stack multi-client bounties.",
+    "Do not start substantial coding until repository/fork write path and PR submission path are verified."
+  ],
   "next_action": {
-    "mode": "VERIFY_AND_EXECUTE",
-    "instruction": "On each run, re-verify live paid demand and execution-chain writability. Execute immediately when fully writable; otherwise surface only one-time setup candidates with strong reusable value."
+    "mode": "SEARCH",
+    "instruction": "Search for newly funded, canonical, low-competition, narrow-scope opportunities. Execute only after canonical funding, competition and writable submission path all pass."
   }
 }
