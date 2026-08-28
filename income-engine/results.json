@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2",
-  "updated_at": "2026-08-28T11:06:55+05:30",
+  "schema_version": "1.3",
+  "updated_at": "2026-08-28T12:13:01+05:30",
   "objective": "Convert existing market demand into legitimate revenue as directly as possible, prioritizing end-to-end autonomous execution and reusable one-time setup rails.",
   "execution_policy": {
     "priority": [
@@ -19,8 +19,7 @@
       "one_time_setup": "Connect the Frantic MCP endpoint to an environment ChatGPT can operate and complete reusable identity/payout onboarding.",
       "post_setup_autonomy": "high",
       "reusability": "high",
-      "payout_path": "x402 payout identity",
-      "notes": "No installable Frantic/Agrenting/MCP marketplace plugin was available in this run; re-verify inventory once the rail becomes connectable."
+      "payout_path": "x402 payout identity"
     },
     {
       "name": "Agrenting autonomous-agent marketplace",
@@ -34,74 +33,57 @@
         "provider_share_percent": 95,
         "monthly_fee_usd": 0,
         "payout_assets_observed": ["USDT", "USDC", "DAI"]
+      }
+    },
+    {
+      "name": "GPUsion contributor bounties",
+      "classification": "REJECTED_AUTONOMY",
+      "status": "legitimate_payout_but_recurring_manual_fork_required",
+      "canonical_repo": "https://github.com/knewnothing-git/gpusion-driver",
+      "verified_economics": {
+        "india_payout": "UPI or bank transfer",
+        "payment_window": "within 7 days of PR merge",
+        "examples": {
+          "hindi_setup_guide_inr": 1000,
+          "documentation_improvement_inr": 500,
+          "bug_report_inr": 250,
+          "directml_cpu_passthrough_inr": 5000
+        }
       },
-      "notes": "Infrastructure fit strong; buyer demand density still needs proof."
+      "reason": "The current GitHub connector can read the upstream repository and create PRs, branches, commits and files only where it has write access, but exposes no fork-repository action. Each new external project would therefore require a recurring unsupported manual fork before submission.",
+      "learned_rule": "Treat external GitHub PR bounties as non-autonomous unless a writable fork already exists or the connector gains a reusable programmatic fork/provisioning capability."
     },
     {
       "name": "Fluxer Polls bounty #2",
       "classification": "REJECTED_CURRENTLY",
       "status": "funded_but_competed_and_large_scope",
       "reward_usd": 500,
-      "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/2",
-      "verified": {
-        "state": "open",
-        "bounty_platform": "BountyHub",
-        "comments": 17,
-        "active_worker_confirmed_by_maintainer": true
-      },
-      "reason": "Maintainer explicitly states another person is already working on it; full scope spans server, desktop and mobile plus ranked-choice, images, permissions and moderation. Expected value is inferior to an uncontested fixed-scope bounty.",
-      "learned_rule": "Do not equate open+funded with winnable. Read canonical issue comments for maintainer-confirmed active workers before spending build time."
-    },
-    {
-      "name": "Fluxer Events/Calendar bounty #3",
-      "classification": "WATCH_NOT_BUILD",
-      "reward_usd": 500,
-      "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/3",
-      "reason": "Full-stack backend+desktop+mobile single-PR acceptance requirement makes execution large relative to reward; project also warns against low-quality GenAI output.",
-      "learned_rule": "Penalize bounties requiring multi-client full-stack implementation in one PR even when nominal competition is low."
+      "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/2"
     },
     {
       "name": "BountyScout / bounty-plaza mirrors",
       "classification": "DISCOVERY_ONLY",
-      "status": "never_treat_mirror_as_payment_proof",
-      "reason": "Search results include mirrored or synthetic-looking bounty listings. Canonical source, actual funding/escrow and current state must be independently verified.",
-      "latest_validation": "A mirrored $500 TypeScript transpilation bounty pointed to Iamgoofball/-tg-station issue #77, but the canonical repository has GitHub Issues disabled (HTTP 410), so the mirrored listing is not executable evidence.",
-      "learned_rule": "Mirrors are leads only; canonical payer evidence is mandatory, and the canonical issue endpoint itself must be live before ranking the opportunity."
+      "status": "never_treat_mirror_as_payment_proof"
     },
     {
       "name": "Algora rail",
       "classification": "NO_CURRENT_OPPORTUNITY",
-      "status": "fresh_scan_found_zero_open_bounties_on_sampled_active_projects",
-      "observed": ["Algora", "Windmill Labs", "PX4", "Coder", "Twenty", "Archestra", "Documenso", "Grit"],
-      "notes": "India-based solvers are visibly represented among historical earners, so eligibility is not the blocker; current open inventory is."
+      "status": "fresh_scan_found_zero_open_bounties_on_sampled_active_projects"
     },
     {
       "name": "Opire rail",
       "classification": "WATCH",
-      "status": "platform_operational_but_no_verified_low_competition_target_this_run",
-      "payout": "Stripe; 1-7 days after bounty creator initiates payment",
-      "developer_fee": "0% according to Opire FAQ",
-      "notes": "Requires a valid PR to claim; continue only when a canonical low-competition funded issue is found."
-    },
-    {
-      "name": "The Colony",
-      "classification": "DEPRIORITIZED",
-      "status": "structural_demand_and_state_quality_concerns"
-    },
-    {
-      "name": "AsyncAPI microgrant rail",
-      "classification": "REJECTED_FOR_CURRENT_CYCLE",
-      "status": "worthwhile_issues_observed_as_assigned_or_completed"
+      "status": "platform_operational_but_no_verified_low_competition_target_this_run"
     }
   ],
   "search_filters_learned": [
     "Canonical issue must be open.",
     "Verify funding or payer evidence at canonical source, not a mirror.",
-    "Canonical issue endpoint must actually exist and accept issue operations; mirror links to disabled/nonexistent issue trackers are immediate rejects.",
     "Read issue comments before build; reject maintainer-confirmed competing worker unless economics justify race.",
     "Reject already-rewarded issues even if GitHub state remains open.",
     "Prefer narrow acceptance criteria over full-stack multi-client bounties.",
     "Do not start substantial coding until repository/fork write path and PR submission path are verified.",
+    "External GitHub PR bounties fail autonomy when each upstream requires a manual fork; only pursue if a writable fork already exists or programmatic fork provisioning becomes available.",
     "Do not treat historical marketplace payout activity as current demand; require current open inventory."
   ],
   "latest_scan": {
@@ -109,10 +91,10 @@
     "result": "no_opportunity_passed_full_execution_chain",
     "fully_executable_started": 0,
     "new_setup_candidate": false,
-    "material_learning": "Mirror bounty canonical endpoint validation added; current sampled Algora inventory had no open bounties; Opire remains usable infrastructure but no target passed competition/scope verification."
+    "material_learning": "GPUsion verified as a legitimate India-friendly bounty program, but rejected because external GitHub PR work still contains a recurring manual-fork step under the current connector."
   },
   "next_action": {
     "mode": "SEARCH",
-    "instruction": "Search for newly funded, canonical, low-competition, narrow-scope opportunities. Execute only after canonical funding, competition and writable submission path all pass."
+    "instruction": "Prioritize rails that do not require per-project manual fork provisioning: connected-email submissions, agent-native MCP/API marketplaces, already-writable repositories, or GitHub-native systems exposing programmatic fork/provisioning through available tools."
   }
 }
