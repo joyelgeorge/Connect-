@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-08-28T09:27:00+05:30",
+  "objective": "Convert existing market demand into legitimate revenue as directly as possible, prioritizing end-to-end autonomous execution and reusable one-time setup rails.",
+  "execution_policy": {
+    "priority": [
+      "Fully executable now with existing tools",
+      "One-time setup unlocks reusable high-value rail",
+      "Reject when recurring unsupported manual work remains"
+    ],
+    "target_payment_window": "same-day preferred; otherwise credible first payment within 7 days"
+  },
+  "candidates": [
+    {
+      "name": "Frantic agent marketplace",
+      "classification": "SETUP-CANDIDATE",
+      "status": "leading_setup_candidate_from_prior_run",
+      "rail": "Frantic MCP -> paid agent bounties -> x402 payout",
+      "one_time_setup": "Connect the Frantic MCP endpoint to an environment ChatGPT can operate and complete reusable identity/payout onboarding.",
+      "post_setup_autonomy": "high",
+      "reusability": "high",
+      "observed_opportunities": [
+        {"bounty_id": 113, "observed_reward_usd": 18, "observed_slots": 1},
+        {"bounty_id": 97, "observed_reward_usd": 10, "observed_slots": 5},
+        {"bounty_id": 120, "observed_reward_usd": 1, "observed_slots_remaining": 101}
+      ],
+      "payout_path": "x402 payout identity",
+      "notes": "Designed around programmatic claim, delivery, review/revision and payout-status operations. Opportunity availability and amounts should be re-verified before execution."
+    },
+    {
+      "name": "Agrenting autonomous-agent marketplace",
+      "classification": "SETUP-CANDIDATE",
+      "status": "promising_unproven_demand_density",
+      "rail": "Agrenting provider agent -> MCP/REST -> escrowed tasks -> stablecoin payout",
+      "one_time_setup": "Connect provider/MCP rail and configure reusable payout wallet/identity.",
+      "post_setup_autonomy": "very high",
+      "reusability": "very high",
+      "observed_provider_economics": {
+        "provider_share_percent": 95,
+        "monthly_fee_usd": 0,
+        "payout_assets_observed": ["USDT", "USDC", "DAI"]
+      },
+      "observed_task_price_range_usd": [3, 60],
+      "notes": "Infrastructure fit is strong, but public buyer-task volume was not yet sufficiently verified. Re-verify live funded demand before setup."
+    },
+    {
+      "name": "The Colony",
+      "classification": "DEPRIORITIZED",
+      "status": "structural_demand_and_state_quality_concerns",
+      "observed_metrics": {
+        "paid_task_listings": 50,
+        "accepted": 2,
+        "completed": 0
+      },
+      "notes": "Low demonstrated completion density and stale-task-state concern reduced expected value."
+    },
+    {
+      "name": "AsyncAPI microgrant rail",
+      "classification": "REJECTED_FOR_CURRENT_CYCLE",
+      "status": "worthwhile_issues_observed_as_assigned_or_completed",
+      "notes": "Do not spend build time unless newly open eligible paid issues appear."
+    }
+  ],
+  "next_action": {
+    "mode": "VERIFY_AND_EXECUTE",
+    "instruction": "On each run, re-verify live paid demand and execution-chain writability. Execute immediately when fully writable; otherwise surface only one-time setup candidates with strong reusable value."
+  }
+}
