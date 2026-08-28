@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.4",
-  "updated_at": "2026-08-28T14:09:13+05:30",
+  "schema_version": "1.5",
+  "updated_at": "2026-08-28T14:46:00+05:30",
   "objective": "Convert existing market demand into legitimate revenue as directly as possible, prioritizing end-to-end autonomous execution and reusable one-time setup rails.",
   "execution_policy": {
     "priority": [
@@ -8,113 +8,93 @@
       "One-time setup unlocks reusable high-value rail",
       "Reject when recurring unsupported manual work remains"
     ],
+    "first_transaction_policy": "Allow economically trivial funded work when needed to validate the complete autonomous execution chain before optimizing revenue.",
     "target_payment_window": "same-day preferred; otherwise credible first payment within 7 days"
+  },
+  "validated_capabilities": {
+    "clawlancer_http_transport": true,
+    "clawlancer_registration": true,
+    "clawlancer_api_key_creation": true,
+    "clawlancer_cdp_wallet_creation": true,
+    "clawlancer_claim_request_reaches_platform": true,
+    "clawlancer_onchain_escrow_creation": false,
+    "clawlancer_delivery_submission": "not_reached",
+    "clawlancer_acceptance": "not_reached",
+    "clawlancer_payment": "not_reached"
   },
   "candidates": [
     {
       "name": "Clawlancer",
-      "classification": "SETUP-CANDIDATE",
-      "status": "best_new_agent_native_rail_but_current_high_value_inventory_is_thin",
+      "classification": "TEMPORARILY_PLATFORM_BLOCKED",
+      "status": "transport_auth_registration_and_wallet_work; claim blocked by underfunded platform escrow signer",
       "rail": "Clawlancer MCP/REST -> prefunded Base-USDC bounties -> API claim/deliver -> escrow -> USDC wallet",
-      "one_time_setup": "Register an agent, retain its API key/wallet identity, and expose the Clawlancer MCP or REST credential to an environment ChatGPT can operate. Fund approximately $0.10 of ETH on Base only if welcome gas is unavailable.",
-      "what_it_unlocks": "Programmatic discovery, bounty claim, delivery submission, transaction evidence/disputes, notifications, balance checks, and USDC withdrawal.",
-      "post_setup_autonomy": "very high",
+      "post_setup_autonomy": "very high if platform escrow signer is funded",
       "reusability": "very high",
-      "economics": {
-        "payout_asset": "USDC on Base",
-        "bounties_prefunded": true,
-        "platform_fee_beta_percent": 0,
-        "estimated_gas_per_claim_or_delivery_usd": 0.01,
-        "marketplace_listings_observed": 50,
-        "bounties_filter_count_observed": 45
+      "current_blocker": {
+        "type": "platform_side_gas_shortfall",
+        "operation": "create on-chain escrow during bounty claim",
+        "error": "Failed to create on-chain escrow",
+        "platform_signer": "0x4602973Aa67b70BfD08D299f2AafC084179A8101",
+        "available_wei": "208952522721",
+        "required_wei": "278582400000",
+        "shortfall_wei": "69629877279",
+        "transaction_id": null
       },
-      "current_inventory_observation": "Fresh marketplace inventory is dominated by $0.01-$0.03 starter/demo bounties; a $5 same-day API viability report and an indexed $95 QA evidence bounty were found, but the $95 listing's current claimability could not be independently confirmed from the rendered detail page.",
-      "india_eligibility": "No India exclusion found in the published terms; payouts are cryptocurrency and user remains responsible for applicable law/tax compliance.",
-      "execution_chain_after_setup": "9/10 to 10/10 depending on whether a live bounty requires external artifacts beyond text/API delivery.",
-      "expected_value": "Rail quality is high; immediate expected value is moderate-to-low until more non-starter funded bounties appear. Better infrastructure than most human freelance marketplaces, but not yet sufficient to justify setup solely for today's visible cents-level inventory."
+      "test_evidence": [
+        "Original active $0.01 bounty claim failed at the same escrow signer/gas step.",
+        "Taskman platform-generated welcome $0.01 bounty claim failed at the same escrow signer/gas step.",
+        "No external funds were sent.",
+        "No repeated retries were made after confirming the systemic blocker."
+      ],
+      "decision": "Do not retry or fund around the platform blocker. Re-test only after evidence the platform signer has been replenished or a platform fix is deployed."
     },
     {
       "name": "Frantic agent marketplace",
       "classification": "SETUP-CANDIDATE",
-      "status": "leading_setup_candidate_from_prior_run",
+      "status": "prior promising agent-native rail; re-verify current demand and writability before setup",
       "rail": "Frantic MCP -> paid agent bounties -> x402 payout",
-      "one_time_setup": "Connect the Frantic MCP endpoint to an environment ChatGPT can operate and complete reusable identity/payout onboarding.",
       "post_setup_autonomy": "high",
-      "reusability": "high",
-      "payout_path": "x402 payout identity"
+      "reusability": "high"
     },
     {
       "name": "Agrenting autonomous-agent marketplace",
       "classification": "SETUP-CANDIDATE",
-      "status": "promising_unproven_demand_density",
+      "status": "promising but buyer-demand density unproven",
       "rail": "Agrenting provider agent -> MCP/REST -> escrowed tasks -> stablecoin payout",
-      "one_time_setup": "Connect provider/MCP rail and configure reusable payout wallet/identity.",
       "post_setup_autonomy": "very high",
-      "reusability": "very high",
-      "observed_provider_economics": {
-        "provider_share_percent": 95,
-        "monthly_fee_usd": 0,
-        "payout_assets_observed": ["USDT", "USDC", "DAI"]
-      }
+      "reusability": "very high"
     },
     {
       "name": "SporeAgent",
       "classification": "DEPRIORITIZED_UNTIL_FRESH_DEMAND",
-      "status": "excellent_MCP_lifecycle_but_open_tasks_appear_5_to_6_months_old_and_public_stats_are_internally_inconsistent",
-      "observations": "Docs support register/browse/bid/deliver through MCP and Stripe escrow with 15% platform fee, but task pages show roughly 159-182 day-old open inventory and public home/dashboard payout totals conflict ($48,210 vs $300). Do not spend setup effort until fresh paid task activity is verified."
+      "status": "agent-native lifecycle promising but observed public task freshness/metrics were weak or inconsistent"
     },
     {
-      "name": "GPUsion contributor bounties",
-      "classification": "REJECTED_AUTONOMY",
-      "status": "legitimate_payout_but_recurring_manual_fork_required",
-      "canonical_repo": "https://github.com/knewnothing-git/gpusion-driver",
-      "reason": "External GitHub PR work still requires recurring unsupported fork provisioning under the current connector."
-    },
-    {
-      "name": "Fluxer Polls bounty #2",
-      "classification": "REJECTED_CURRENTLY",
-      "status": "funded_but_competed_and_large_scope",
-      "reward_usd": 500,
-      "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/2"
-    },
-    {
-      "name": "BountyScout / bounty-plaza mirrors",
-      "classification": "DISCOVERY_ONLY",
-      "status": "never_treat_mirror_as_payment_proof"
-    },
-    {
-      "name": "Algora rail",
-      "classification": "NO_CURRENT_OPPORTUNITY",
-      "status": "fresh_scan_found_zero_open_bounties_on_sampled_active_projects"
-    },
-    {
-      "name": "Opire rail",
-      "classification": "WATCH",
-      "status": "platform_operational_but_no_verified_low_competition_target_this_run"
+      "name": "Algora/general GitHub bounty mining",
+      "classification": "DEPRIORITIZED",
+      "status": "continue only when canonical funding, low competition and complete writable contribution path are verified"
     }
   ],
   "search_filters_learned": [
     "Canonical issue/task must be open and current.",
     "Verify funding or payer evidence at canonical source, not a mirror.",
     "Read comments/bids before build; reject maintainer-confirmed competing worker unless economics justify race.",
-    "Reject already-rewarded issues even if state remains open.",
-    "Prefer narrow acceptance criteria over full-stack multi-client bounties.",
-    "Do not start substantial coding until write/submission path is verified.",
-    "External GitHub PR bounties fail autonomy when each upstream requires a manual fork.",
-    "Do not treat historical marketplace payout activity as current demand; require fresh open inventory.",
-    "For agent-native marketplaces, separate rail quality from inventory quality: a perfect API is not worth setup when nearly all currently claimable work is pennies.",
-    "Treat conflicting public marketplace metrics as a reliability warning requiring independent verification before setup."
+    "Do not start substantial work until claim and submission paths are verified writable.",
+    "For agent-native marketplaces, distinguish API quality from live funded demand quality.",
+    "A tiny first paid task is worthwhile when it proves the complete execution and payout chain.",
+    "Do not assume a documented pre-funded/free claim path actually works: test the on-chain/platform settlement step.",
+    "When two independent bounties fail through the same platform signer and escrow operation, classify the rail as platform-blocked rather than retrying or sending funds.",
+    "Never compensate for a marketplace's underfunded internal signer by sending external funds unless that is an explicit normal user-side requirement and economics justify it."
   ],
   "latest_scan": {
     "date": "2026-08-28",
-    "result": "new_setup_candidate_found_but_no_current_opportunity_passed_full_execution_chain",
-    "fully_executable_started": 0,
-    "new_setup_candidate": true,
-    "candidate": "Clawlancer",
-    "material_learning": "Clawlancer exposes one of the strongest end-to-end agent APIs found so far, including registration, prefunded bounty claim, delivery, escrow/dispute, notifications and USDC withdrawal. However fresh visible inventory is dominated by $0.01-$0.03 tasks, so infrastructure quality alone does not justify immediate setup without stronger live bounty value."
+    "result": "clawlancer_end_to_end_test_reached_platform_onchain_layer_and_identified_systemic_platform_gas_blocker",
+    "fully_executable_started": 1,
+    "paid_submission_completed": 0,
+    "material_learning": "Transport, authentication, account creation, API-key creation and wallet creation are proven. The next missing functionality is not ours: Clawlancer's escrow signer lacks enough ETH to create escrow. Two separate active bounties reproduced the same failure."
   },
   "next_action": {
-    "mode": "SEARCH",
-    "instruction": "Watch Clawlancer for fresh bounties above a meaningful minimum (prefer >=$10), while continuing discovery of agent-native MCP/API rails with verified current funded demand. If a sufficiently valuable Clawlancer bounty appears, setup becomes immediately justified because post-setup execution is API-native."
+    "mode": "SEARCH_AND_EXECUTE_ALTERNATE_RAIL",
+    "instruction": "Stop retrying Clawlancer until platform-side gas funding is repaired. Preserve the successful Taskman identity and credentials locally. Search for the next smallest funded opportunity on a rail where claim, delivery and payout can be executed now; prioritize proving one complete accepted payment over headline bounty size."
   }
 }
