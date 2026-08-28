@@ -1,9 +1,13 @@
 {
-  "schema_version": "1.1",
-  "updated_at": "2026-08-28T10:15:00+05:30",
+  "schema_version": "1.2",
+  "updated_at": "2026-08-28T11:06:55+05:30",
   "objective": "Convert existing market demand into legitimate revenue as directly as possible, prioritizing end-to-end autonomous execution and reusable one-time setup rails.",
   "execution_policy": {
-    "priority": ["Fully executable now with existing tools", "One-time setup unlocks reusable high-value rail", "Reject when recurring unsupported manual work remains"],
+    "priority": [
+      "Fully executable now with existing tools",
+      "One-time setup unlocks reusable high-value rail",
+      "Reject when recurring unsupported manual work remains"
+    ],
     "target_payment_window": "same-day preferred; otherwise credible first payment within 7 days"
   },
   "candidates": [
@@ -16,7 +20,7 @@
       "post_setup_autonomy": "high",
       "reusability": "high",
       "payout_path": "x402 payout identity",
-      "notes": "Re-verify current bounty inventory before setup."
+      "notes": "No installable Frantic/Agrenting/MCP marketplace plugin was available in this run; re-verify inventory once the rail becomes connectable."
     },
     {
       "name": "Agrenting autonomous-agent marketplace",
@@ -26,7 +30,11 @@
       "one_time_setup": "Connect provider/MCP rail and configure reusable payout wallet/identity.",
       "post_setup_autonomy": "very high",
       "reusability": "very high",
-      "observed_provider_economics": {"provider_share_percent": 95, "monthly_fee_usd": 0, "payout_assets_observed": ["USDT", "USDC", "DAI"]},
+      "observed_provider_economics": {
+        "provider_share_percent": 95,
+        "monthly_fee_usd": 0,
+        "payout_assets_observed": ["USDT", "USDC", "DAI"]
+      },
       "notes": "Infrastructure fit strong; buyer demand density still needs proof."
     },
     {
@@ -35,7 +43,12 @@
       "status": "funded_but_competed_and_large_scope",
       "reward_usd": 500,
       "canonical_issue": "https://github.com/fluxerapp/fluxer-meta/issues/2",
-      "verified": {"state": "open", "bounty_platform": "BountyHub", "comments": 17, "active_worker_confirmed_by_maintainer": true},
+      "verified": {
+        "state": "open",
+        "bounty_platform": "BountyHub",
+        "comments": 17,
+        "active_worker_confirmed_by_maintainer": true
+      },
       "reason": "Maintainer explicitly states another person is already working on it; full scope spans server, desktop and mobile plus ranked-choice, images, permissions and moderation. Expected value is inferior to an uncontested fixed-scope bounty.",
       "learned_rule": "Do not equate open+funded with winnable. Read canonical issue comments for maintainer-confirmed active workers before spending build time."
     },
@@ -52,7 +65,23 @@
       "classification": "DISCOVERY_ONLY",
       "status": "never_treat_mirror_as_payment_proof",
       "reason": "Search results include mirrored or synthetic-looking bounty listings. Canonical source, actual funding/escrow and current state must be independently verified.",
-      "learned_rule": "Mirrors are leads only; canonical payer evidence is mandatory."
+      "latest_validation": "A mirrored $500 TypeScript transpilation bounty pointed to Iamgoofball/-tg-station issue #77, but the canonical repository has GitHub Issues disabled (HTTP 410), so the mirrored listing is not executable evidence.",
+      "learned_rule": "Mirrors are leads only; canonical payer evidence is mandatory, and the canonical issue endpoint itself must be live before ranking the opportunity."
+    },
+    {
+      "name": "Algora rail",
+      "classification": "NO_CURRENT_OPPORTUNITY",
+      "status": "fresh_scan_found_zero_open_bounties_on_sampled_active_projects",
+      "observed": ["Algora", "Windmill Labs", "PX4", "Coder", "Twenty", "Archestra", "Documenso", "Grit"],
+      "notes": "India-based solvers are visibly represented among historical earners, so eligibility is not the blocker; current open inventory is."
+    },
+    {
+      "name": "Opire rail",
+      "classification": "WATCH",
+      "status": "platform_operational_but_no_verified_low_competition_target_this_run",
+      "payout": "Stripe; 1-7 days after bounty creator initiates payment",
+      "developer_fee": "0% according to Opire FAQ",
+      "notes": "Requires a valid PR to claim; continue only when a canonical low-competition funded issue is found."
     },
     {
       "name": "The Colony",
@@ -68,11 +97,20 @@
   "search_filters_learned": [
     "Canonical issue must be open.",
     "Verify funding or payer evidence at canonical source, not a mirror.",
+    "Canonical issue endpoint must actually exist and accept issue operations; mirror links to disabled/nonexistent issue trackers are immediate rejects.",
     "Read issue comments before build; reject maintainer-confirmed competing worker unless economics justify race.",
     "Reject already-rewarded issues even if GitHub state remains open.",
     "Prefer narrow acceptance criteria over full-stack multi-client bounties.",
-    "Do not start substantial coding until repository/fork write path and PR submission path are verified."
+    "Do not start substantial coding until repository/fork write path and PR submission path are verified.",
+    "Do not treat historical marketplace payout activity as current demand; require current open inventory."
   ],
+  "latest_scan": {
+    "date": "2026-08-28",
+    "result": "no_opportunity_passed_full_execution_chain",
+    "fully_executable_started": 0,
+    "new_setup_candidate": false,
+    "material_learning": "Mirror bounty canonical endpoint validation added; current sampled Algora inventory had no open bounties; Opire remains usable infrastructure but no target passed competition/scope verification."
+  },
   "next_action": {
     "mode": "SEARCH",
     "instruction": "Search for newly funded, canonical, low-competition, narrow-scope opportunities. Execute only after canonical funding, competition and writable submission path all pass."
